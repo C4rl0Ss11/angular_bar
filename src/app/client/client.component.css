@@ -1,0 +1,73 @@
+.card {
+  width: 100%;
+  background-color: white;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card-header {
+  background-color: #007bff;
+  color: white;
+}
+
+.card-header h5 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.table {
+  margin-top: 16px;
+}
+
+.table th,
+.table td {
+  text-align: left;
+  padding: 8px;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.btn-outline-primary {
+  margin-right: 4px;
+}
+
+i {
+  font-size: 20px;
+}
+
+.container {
+  margin-top: 20px;
+}
+
+.row.mb-2 {
+  margin-bottom: 20px;
+}
+
+.btn-primary {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.btn-primary.btn-sm,
+.btn-danger.btn-sm {
+  padding: 5px 10px;
+  font-size: 14px;
+  margin-right: 5px;
+}
+
+.table {
+  margin-top: 20px;
+}
+
+.table thead th {
+  text-align: center;
+  font-weight: bold;
+}
+
+.table tbody td {
+  text-align: center;
+}

@@ -1,0 +1,43 @@
+<div class="card">
+  <div class="card-header">
+    <h5 class="mb-0">Agregar Cliente</h5>
+  </div>
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" #clientForm="ngForm">
+      <div class="mb-3">
+        <label for="name" class="form-label">Nombre</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          [(ngModel)]="client.name"
+          name="name"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="last_name" class="form-label">Apellido</label>
+        <input
+          type="text"
+          class="form-control"
+          id="last_name"
+          [(ngModel)]="client.last_name"
+          name="last_name"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Correo Electrónico</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          [(ngModel)]="client.email"
+          name="email"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">Agregar</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+.container {
+  margin-top: 20px;
+}
+
+.d-flex {
+  margin-bottom: 20px;
+}
+
+.btn-primary {
+  padding: 8px 15px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.table {
+  margin-top: 20px;
+}
+
+.table thead th {
+  text-align: center;
+  font-weight: bold;
+}
+
+.table tbody td {
+  text-align: center;
+}
+
+.btn-primary.btn-sm,
+.btn-danger.btn-sm {
+  padding: 5px 10px;
+  font-size: 14px;
+  margin-right: 5px;
+}

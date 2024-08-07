@@ -1,0 +1,31 @@
+.card {
+  width: 100%;
+  background-color: white;
+  margin-top: 16px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 80%;
+}
+
+.card-header {
+  background-color: #007bff;
+  color: white;
+}
+
+.card-header h5 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.form-control {
+  margin-bottom: 16px;
+}
+
+.btn-primary,
+.btn-secondary {
+  margin-top: 16px;
+}

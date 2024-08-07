@@ -1,0 +1,38 @@
+<div class="container mt-3">
+  <div class="d-flex justify-content-between mb-3">
+    <h2>Categorías</h2>
+    <a class="btn btn-primary" routerLink="/categorias/add"
+      >Agregar Categoría +</a
+    >
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Nombre</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of categories">
+        <td>{{ category.id }}</td>
+        <td>{{ category.name }}</td>
+        <td>
+          <button
+            class="btn btn-primary btn-sm"
+            (click)="editCategory(category)"
+          >
+            Editar
+          </button>
+          <button
+            class="btn btn-danger btn-sm"
+            (click)="deleteCategory(category.id)"
+          >
+            Eliminar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
