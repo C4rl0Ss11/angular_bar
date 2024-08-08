@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from '../product/product';
 
@@ -7,27 +7,32 @@ import { Product } from '../product/product';
   providedIn: 'root',
 })
 export class ProductService {
-  private apiUrl = 'http://localhost:8080/api/product/findAll';
+  private apiUrl = 'http://localhost:8080/api/product';
 
   constructor(private http: HttpClient) {}
 
   getAllProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiUrl);
+    return this.http.get<Product[]>(`${this.apiUrl}/findAll`);
   }
 
-  getProductById(productId: number): Observable<Product> {
-    return this.http.get<Product>(`${this.apiUrl}/${productId}`);
+  getProductById(id: number): Observable<Product> {
+    return this.http.get<Product>(`${this.apiUrl}/find/${id}`);
   }
 
   addProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>(this.apiUrl, product);
+    return this.http.post<Product>(`${this.apiUrl}/save`, product);
   }
 
-  updateProduct(productId: number, product: Product): Observable<Product> {
-    return this.http.put<Product>(`${this.apiUrl}/${productId}`, product);
+  updateProduct(id: number, product: Product): Observable<any> {
+    return this.http.put(`${this.apiUrl}/update/${id}`, product, {
+      responseType: 'text',
+    });
   }
 
-  deleteProduct(productId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${productId}`);
+  deleteProduct(id: number): Observable<HttpResponse<any>> {
+    return this.http.delete(`${this.apiUrl}/delete/${id}`, {
+      observe: 'response',
+      responseType: 'text',
+    });
   }
 }

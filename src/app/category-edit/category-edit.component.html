@@ -1,0 +1,20 @@
+<div class="container">
+  <h2>Editar Categoría</h2>
+  <form (ngSubmit)="saveCategory()" *ngIf="category">
+    <div class="form-group">
+      <label for="name">Nombre:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        [(ngModel)]="category.name"
+        name="name"
+        required
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <button type="button" class="btn btn-secondary" (click)="cancel()">
+      Cancelar
+    </button>
+  </form>
+</div>

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Importar aquí
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -13,6 +13,10 @@ import { HomeComponent } from './home/home.component';
 
 import { ClientAddComponent } from './client-add/client-add.component';
 import { ClientEditComponent } from './client-edit/client-edit.component';
+import { CategoryAddComponent } from './category-add/category-add.component';
+import { CategoryEditComponent } from './category-edit/category-edit.component';
+import { ProductAddComponent } from './product-add/product-add.component';
+import { ProductEditComponent } from './product-edit/product-edit.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +28,10 @@ import { ClientEditComponent } from './client-edit/client-edit.component';
     HomeComponent,
     ClientAddComponent,
     ClientEditComponent,
+    CategoryAddComponent,
+    CategoryEditComponent,
+    ProductAddComponent,
+    ProductEditComponent,
   ],
   imports: [
     BrowserModule,

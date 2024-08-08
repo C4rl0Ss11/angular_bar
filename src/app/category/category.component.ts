@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CategoryService } from '../services/category.service';
 import { Category } from '../category/category';
 
@@ -11,7 +12,10 @@ export class CategoryComponent implements OnInit {
   categories: Category[] = [];
   displayedColumns: string[] = ['id', 'name', 'actions'];
 
-  constructor(private categoryService: CategoryService) {}
+  constructor(
+    private categoryService: CategoryService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loadCategories();
@@ -24,12 +28,18 @@ export class CategoryComponent implements OnInit {
   }
 
   editCategory(category: Category): void {
-    console.log('Edit category', category);
+    this.router.navigate(['/categorias/edit', category.id]);
   }
 
   deleteCategory(id: number): void {
-    this.categoryService.deleteCategory(id).subscribe(() => {
-      this.categories = this.categories.filter((cat) => cat.id !== id);
-    });
+    this.categoryService.deleteCategory(id).subscribe(
+      () => {
+        this.categories = this.categories.filter((cat) => cat.id !== id);
+        this.router.navigate(['/categorias']);
+      },
+      (error) => {
+        console.error('Error al eliminar categoría', error);
+      }
+    );
   }
 }
