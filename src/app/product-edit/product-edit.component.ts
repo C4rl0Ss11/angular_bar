@@ -38,6 +38,7 @@ export class ProductEditComponent implements OnInit {
     this.productService.getProductById(this.productId).subscribe(
       (data: Product) => {
         this.product = data;
+        console.log(this.product);
       },
       (error) => {
         console.error('Error al cargar producto', error);

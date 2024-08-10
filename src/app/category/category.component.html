@@ -6,33 +6,34 @@
     >
   </div>
 
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Nombre</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let category of categories">
-        <td>{{ category.id }}</td>
-        <td>{{ category.name }}</td>
-        <td>
-          <button
-            class="btn btn-primary btn-sm"
-            (click)="editCategory(category)"
-          >
-            Editar
-          </button>
-          <button
-            class="btn btn-danger btn-sm"
-            (click)="deleteCategory(category.id)"
-          >
-            Eliminar
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="row">
+    <ng-container *ngFor="let category of categories">
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <img
+            [src]="getCategoryImage(category.id)"
+            class="card-img-top"
+            alt="{{ category.name }}"
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{ category.name }}</h5>
+            <div class="d-flex justify-content-between">
+              <button
+                class="btn btn-primary btn-sm"
+                (click)="editCategory(category)"
+              >
+                Editar
+              </button>
+              <button
+                class="btn btn-danger btn-sm"
+                (click)="deleteCategory(category.id)"
+              >
+                Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
 </div>
