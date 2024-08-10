@@ -10,3 +10,27 @@
 .table {
   margin-top: 20px;
 }
+
+.btn-primary.btn-sm,
+.btn-danger.btn-sm {
+  padding: 5px 10px;
+  font-size: 14px;
+  margin-right: 5px;
+}
+
+.btn-primary {
+  padding: 8px 15px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.card-img-top {
+  width: 100%;
+  max-height: 230px;
+  height: 100%;
+  object-fit: fill;
+}
+
+.card-body {
+  flex: 1;
+}
