@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 })
 export class ProductComponent implements OnInit {
   products: Product[] = [];
+  searchText: string = '';
+  filteredProducts: Product[] = [];
   productImages: { [key: number]: string } = {};
 
   constructor(private productService: ProductService, private router: Router) {}
@@ -23,6 +25,7 @@ export class ProductComponent implements OnInit {
     this.productService.getAllProducts().subscribe(
       (data: Product[]) => {
         this.products = data;
+        this.filteredProducts = data;
       },
       (error) => {
         console.error('Error fetching products', error);
@@ -44,7 +47,7 @@ export class ProductComponent implements OnInit {
       10:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8hh2Urkg-4A6iCoWZIxpT9MzFCRook-VRkw&s',
       11:'https://3.bp.blogspot.com/-TOjI4t-f64A/UO9gkng3okI/AAAAAAAAAfQ/3NdKHeCCzkY/s1600/eeeee.JPG',
       12: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOp_Al2jcWFx0hj4IfGXwgkvsADIYgId9OKw&s',
- 13: 'https://storage.googleapis.com/eltiempo/1/2021/07/Como-preparar-un-mostrito-peruano.jpg',
+      13: 'https://storage.googleapis.com/eltiempo/1/2021/07/Como-preparar-un-mostrito-peruano.jpg',
       14: 'https://media-cdn.tripadvisor.com/media/photo-s/18/c2/0b/7e/pollo-broaster-con-papas.jpg',
       15: 'https://tofuu.getjusto.com/orioneat-prod/2P2Nvdjr78JBj2AqB-Promo%20Salchipapa%20de%20hot%20dog%20x2%20-%20La%20Cl%C3%A1sica.png',
       16: 'https://tofuu.getjusto.com/orioneat-local/resized2/TokWwJfJo3GXrrgcc-1200-1200.webp',
@@ -52,6 +55,13 @@ export class ProductComponent implements OnInit {
       18: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFLU-9-VWX4eBDvc_gO41HSRMWRvOe2Fp-yQ&s'
       
     };
+  }
+  applyFilter(): void {
+    const searchTextLower = this.searchText.toLowerCase();
+    this.filteredProducts = this.products.filter(
+      (product) =>
+        product.name.toLowerCase().includes(searchTextLower)
+    );
   }
 
   getProductImage(productId: number): string {
