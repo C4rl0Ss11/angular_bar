@@ -1,38 +1,44 @@
 <div class="container">
-    <div class="card">
-      <div class="card-header">
-        <h3> Detalle Ventas </h3>
-  
-      </div>
-      <div class="card-body">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>ID Venta</th>
-              <th>ID Productos</th>
-              <th>Cantidad</th>
-              <th>Subtotal</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-  <tbody>
-    <tr *ngFor="let detalle of filteredDetalles" class="text-center">
-      <td>{{detalle.id}}</td>
-      <td>{{detalle.idVenta}}</td>
-      <td>{{detalle.idProducto}}</td>
-      <td>{{detalle.cantidad}}</td>
-      <td>{{detalle.subtotal }}</td>
-      <td>
-        <button class="btn btn-warning me-2">Editar</button>
-        <button class="btn btn-danger">Eliminar</button>
-      </td>
-  
-    </tr>
-  </tbody>
-        </table>
-      </div>
-  
+  <div class="card">
+    <div class="card-header">
+      <h3>Detalle Ventas</h3>
     </div>
-  
+    <div class="card-body">
+      <table class="table table-hover">
+        <thead class="thead-light">
+          <tr>
+            <th>ID</th>
+            <th>ID Venta</th>
+            <th>ID Producto</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let detalle of detallesVenta" class="text-center">
+            <td>{{ detalle.id }}</td>
+            <td>{{ detalle.idVenta }}</td>
+            <td>{{ detalle.idProducto }}</td>
+            <td>{{ detalle.cantidad }}</td>
+            <td>{{ detalle.subtotal | currency }}</td>
+            <td>
+              <button
+                class="btn btn-warning me-2"
+                (click)="editDetalle(detalle)"
+              >
+                Editar
+              </button>
+              <button
+                class="btn btn-danger"
+                (click)="deleteDetalle(detalle.id)"
+              >
+                Eliminar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
+</div>

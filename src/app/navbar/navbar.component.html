@@ -1,6 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Bar</a>
+    <svg xmlns="http://www.w3.org/2000/svg" width="25" viewBox="0 0 512 512"><path fill="#ffffff" d="M32 0C19.1 0 7.4 7.8 2.4 19.8s-2.2 25.7 6.9 34.9L224 269.3 224 448l-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l96 0 96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0 0-178.7L502.6 54.6c9.2-9.2 11.9-22.9 6.9-34.9S492.9 0 480 0L32 0zM173.3 128l-64-64 293.5 0-64 64-165.5 0z"/></svg>
+    <a class="navbar-brand" href="#">Barcito</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -13,21 +14,32 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
+      <ul class="navbar-nav d-flex justify-content-center flex-grow-1">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/clientes">Clientes</a>
+          <a
+            class="nav-link"
+            routerLink="/clientes"
+            routerLinkActive="nav-active"
+            >Lista De Clientes</a
+          >
+        </li>
+        
+        
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/ventas"
+            routerLinkActive="nav-active"
+            >Vender</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/productos">Productos</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/categorias">Categorías</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/ventas">Ventas</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/detalleventas">Ver DetalleVenta</a>
+          <a
+            class="nav-link"
+            routerLink="/detalleventas"
+            routerLinkActive="nav-active"
+            >Historial de Ventas</a
+          >
         </li>
       </ul>
     </div>

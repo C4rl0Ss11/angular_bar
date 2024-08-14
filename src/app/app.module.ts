@@ -36,8 +36,8 @@ import { SaleAddComponent } from './sale-add/sale-add.component';
     ProductAddComponent,
     ProductEditComponent,
     VentaComponent,
-    DetalleVentaComponent,
     SaleAddComponent,
+    DetalleVentaComponent,
   ],
   imports: [
     BrowserModule,

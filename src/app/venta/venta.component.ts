@@ -5,33 +5,25 @@ import { Venta } from '../venta/venta';
 @Component({
   selector: 'app-venta',
   templateUrl: './venta.component.html',
-  styleUrl: './venta.component.css'
+  styleUrl: './venta.component.css',
 })
 export class VentaComponent implements OnInit {
   ventas: Venta[] = [];
-  filteredVentas: Venta[] = [];
-  searchText: string = '';
-  displayedColumns: string[] = ['idVenta', 'fecha', 'total', 'idCliente', 'estado', 'actions'];
+  displayedColumns: string[] = [
+    'id_Venta',
+    'fecha',
+    'total',
+    'id_Cliente',
+    'estado',
+    'acciones',
+  ];
 
   constructor(private ventaService: VentaService, private router: Router) {}
 
   ngOnInit(): void {
     this.ventaService.getAllVentas().subscribe((data) => {
       this.ventas = data;
-      this.filteredVentas = data;
     });
-  }
-
-  applyFilter(): void {
-    const searchTextLower = this.searchText.toLowerCase();
-    this.filteredVentas = this.ventas.filter(
-      (venta) =>
-        venta.idVenta.toString().includes(searchTextLower) ||
-        venta.fecha.toLowerCase().includes(searchTextLower) ||
-        venta.total.toString().includes(searchTextLower) ||
-        venta.idCliente.toString().includes(searchTextLower) ||
-        venta.estado.toString().includes(searchTextLower)
-    );
   }
 
   editVenta(venta: Venta): void {
@@ -39,10 +31,14 @@ export class VentaComponent implements OnInit {
   }
 
   deleteVenta(ventaId: number): void {
-    this.ventaService.deleteVenta(ventaId).subscribe(() => {
-      this.ventas = this.ventas.filter((venta) => venta.idVenta !== ventaId);
-      this.applyFilter();
-    });
+    this.ventaService.deleteVenta(ventaId).subscribe(
+      () => {
+        this.ventas = this.ventas.filter((venta) => venta.idVenta !== ventaId);
+        this.router.navigate(['/ventas']);
+      },
+      (error) => {
+        console.error('Error al eliminar venta', error);
+      }
+    );
   }
 }
-

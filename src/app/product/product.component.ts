@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 })
 export class ProductComponent implements OnInit {
   products: Product[] = [];
+  searchText: string = '';
+  filteredProducts: Product[] = [];
   productImages: { [key: number]: string } = {};
 
   constructor(private productService: ProductService, private router: Router) {}
@@ -23,6 +25,7 @@ export class ProductComponent implements OnInit {
     this.productService.getAllProducts().subscribe(
       (data: Product[]) => {
         this.products = data;
+        this.filteredProducts = data;
       },
       (error) => {
         console.error('Error fetching products', error);
@@ -34,13 +37,31 @@ export class ProductComponent implements OnInit {
     this.productImages = {
       1: 'https://c.pxhere.com/photos/a2/9a/wine_red_wine_glass_drink_alcohol_benefit_from_wine_glass_red-921766.jpg!d',
       2: 'https://www.shutterstock.com/image-photo/bottle-chilled-white-wine-two-600nw-2479134003.jpg',
-      3: 'https://www.cocineroperuano.com/images/tequenos.JPG',
-      4: 'https://i0.wp.com/www.pasionthermomix.co/wp-content/uploads/2019/03/choco-chocolate.jpg?fit=768%2C480&ssl=1',
-      5: 'https://www.cafescandelas.com/uploads/thumbnail/Ingredientes_del_te_rojo_620X339_s136.jpg?umk=ff4958b03c49b2852a3fe4e3c4dac5dfe749d326',
-      6: 'https://media.istockphoto.com/id/487328697/es/foto/infusi%C3%B3n-de-manzanilla.jpg?s=612x612&w=0&k=20&c=I6HBVmXbuaHt6a_B2ueE2JXVm17uOoa_91D8EQ1gM4A=',
-      7: 'https://comidasperuanas.com.pe/wp-content/uploads/2023/05/arroz_chaufa_2.jpg',
-      8: 'https://www.mdzol.com/u/fotografias/m/2021/12/2/f1280x720-1145523_1277198_5050.png',
+      3: 'https://wongfood.vtexassets.com/arquivos/ids/380082/492072-01-8646.jpg?v=637356601892930000',
+      4: 'https://img.freepik.com/fotos-premium/cabernet-sauvignon-uva-fondo-negro_776894-20095.jpg?w=740',
+      5: 'https://vinoteca.gt/cdn/shop/products/Fortant_Merlot_704x704.jpg?v=1650382631',
+      6: 'https://perufarma.com.pe/wp-content/uploads/2024/06/140102-Errazuriz_Aconcagua_Costa_Pinot_Noir.png',
+      7: 'https://www.cocineroperuano.com/images/tequenos.JPG',
+      8: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk15vNJu4Id0LXzGEbgZLrwIhfQa56-zL5MA&s',
+      9: 'https://imgmedia.buenazo.pe/1200x660/buenazo/original/2021/06/03/60b96f4258c3d7084c543e2d.jpg',
+      10:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8hh2Urkg-4A6iCoWZIxpT9MzFCRook-VRkw&s',
+      11:'https://3.bp.blogspot.com/-TOjI4t-f64A/UO9gkng3okI/AAAAAAAAAfQ/3NdKHeCCzkY/s1600/eeeee.JPG',
+      12: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOp_Al2jcWFx0hj4IfGXwgkvsADIYgId9OKw&s',
+      13: 'https://storage.googleapis.com/eltiempo/1/2021/07/Como-preparar-un-mostrito-peruano.jpg',
+      14: 'https://media-cdn.tripadvisor.com/media/photo-s/18/c2/0b/7e/pollo-broaster-con-papas.jpg',
+      15: 'https://tofuu.getjusto.com/orioneat-prod/2P2Nvdjr78JBj2AqB-Promo%20Salchipapa%20de%20hot%20dog%20x2%20-%20La%20Cl%C3%A1sica.png',
+      16: 'https://tofuu.getjusto.com/orioneat-local/resized2/TokWwJfJo3GXrrgcc-1200-1200.webp',
+      17: 'https://cdn.cuponidad.pe/images/Deals/parrilla10-045.jpg',
+      18: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFLU-9-VWX4eBDvc_gO41HSRMWRvOe2Fp-yQ&s'
+      
     };
+  }
+  applyFilter(): void {
+    const searchTextLower = this.searchText.toLowerCase();
+    this.filteredProducts = this.products.filter(
+      (product) =>
+        product.name.toLowerCase().includes(searchTextLower)
+    );
   }
 
   getProductImage(productId: number): string {
