@@ -1,24 +1,29 @@
 <div class="container mt-3">
   <div class="d-flex justify-content-between mb-3">
     <h2>Categorías</h2>
+    <a class="btn btn-secondary" routerLink="/productos">Listado De Productos</a>
     <a class="btn btn-primary" routerLink="/categorias/add"
       >Agregar Categoría +</a
     >
   </div>
+  
 
   <div class="row">
     <ng-container *ngFor="let category of categories">
       <div class="col-md-4 mb-4">
+        
         <div class="card">
           <img
             [src]="getCategoryImage(category.id)"
             class="card-img-top"
             alt="{{ category.name }}"
+            width="250"
+            height="250"
           />
           <div class="card-body">
             <h5 class="card-title">{{ category.name }}</h5>
             <div class="d-flex justify-content-between">
-              <button
+             <!--<button
                 class="btn btn-primary btn-sm"
                 (click)="editCategory(category)"
               >
@@ -29,7 +34,7 @@
                 (click)="deleteCategory(category.id)"
               >
                 Eliminar
-              </button>
+              </button>--> 
             </div>
           </div>
         </div>
