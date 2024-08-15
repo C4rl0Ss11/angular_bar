@@ -13,6 +13,7 @@ export class VentaComponent implements OnInit {
     'id_Venta',
     'fecha',
     'total',
+    'mesa',
     'id_Cliente',
     'estado',
     'acciones',

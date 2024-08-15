@@ -121,6 +121,7 @@ export class SaleAddComponent implements OnInit {
       idVenta: 0,
       fecha: new Date().toISOString().split('T')[0],
       total: this.getTotal(),
+      mesa: 0,
       idCliente: this.selectedClient.id,
       estado: 1,
     };
