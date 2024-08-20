@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ClientService } from '../services/client.service';
+import { Client } from '../client/client';
 
 @Component({
   selector: 'app-client-add',
@@ -8,7 +9,13 @@ import { ClientService } from '../services/client.service';
   styleUrls: ['./client-add.component.css'],
 })
 export class ClientAddComponent {
-  client: any = {};
+  client: Client = {
+    id: 0,
+    name: '',
+    last_name: '',
+    email: '',
+    ventaList: [],
+  };
 
   constructor(private clientService: ClientService, private router: Router) {}
 

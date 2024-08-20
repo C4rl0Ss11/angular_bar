@@ -28,74 +28,67 @@
         <input
           type="text"
           class="form-control"
-          placeholder="Ingresar Numero de Mesa"
+          placeholder="Buscar Producto"
+          [(ngModel)]="searchProductText"
+          (input)="onSearchProduct()"
         />
-        <div class="mb-3">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Buscar Producto"
-            [(ngModel)]="searchProductText"
-            (input)="onSearchProduct()"
-          />
-          <div
-            *ngIf="filteredProducts.length > 0"
-            class="autocomplete-suggestions"
-          >
-            <ul>
-              <li
-                *ngFor="let product of filteredProducts"
-                (click)="selectProduct(product)"
-              >
-                {{ product.name }} - ${{ product.price }}
-              </li>
-            </ul>
-          </div>
+        <div
+          *ngIf="filteredProducts.length > 0"
+          class="autocomplete-suggestions"
+        >
+          <ul>
+            <li
+              *ngFor="let product of filteredProducts"
+              (click)="selectProduct(product)"
+            >
+              {{ product.name }} - ${{ product.price }}
+            </li>
+          </ul>
         </div>
-        <div *ngIf="selectedProducts.length > 0" class="mt-3">
-          <h4>Productos Seleccionados</h4>
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>Nombre</th>
-                <th>Precio</th>
-                <th>Cantidad</th>
-                <th>Subtotal</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let item of selectedProducts">
-                <td>{{ item.product.name }}</td>
-                <td>{{ item.product.price }}</td>
-                <td>
-                  <input
-                    type="number"
-                    class="form-control"
-                    [(ngModel)]="item.quantity"
-                    (change)="updateSubtotal(item)"
-                    min="1"
-                  />
-                </td>
-                <td>{{ item.subtotal | currency }}</td>
-                <td>
-                  <button
-                    class="btn btn-danger btn-sm"
-                    (click)="removeProduct(item)"
-                  >
-                    Eliminar
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <h5>Total: {{ getTotal() | currency }}</h5>
-        </div>
-        <div class="mt-3">
-          <button class="btn btn-primary" (click)="addVenta()">
-            Registrar Venta
-          </button>
-        </div>
+      </div>
+      <div *ngIf="selectedProducts.length > 0" class="mt-3">
+        <h4>Productos Seleccionados</h4>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Precio</th>
+              <th>Cantidad</th>
+              <th>Subtotal</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of selectedProducts">
+              <td>{{ item.product.name }}</td>
+              <td>{{ item.product.price }}</td>
+              <td>
+                <input
+                  type="number"
+                  class="form-control"
+                  [(ngModel)]="item.quantity"
+                  (change)="updateSubtotal(item)"
+                  min="1"
+                />
+              </td>
+              <td>{{ item.subtotal | currency }}</td>
+              <td>
+                <button
+                  class="btn btn-danger btn-sm"
+                  (click)="removeProduct(item)"
+                >
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h5>Total: S/ {{ venta.total | number : "1.2-2" }}</h5>
+      </div>
+      <div class="mt-3">
+        <button class="btn btn-primary" (click)="addVenta()">
+          Registrar Venta
+        </button>
       </div>
     </div>
   </div>

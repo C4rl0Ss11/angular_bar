@@ -9,7 +9,7 @@ import { Client } from '../client/client';
   styleUrls: ['./client-edit.component.css'],
 })
 export class ClientEditComponent implements OnInit {
-  client: Client = { id: 0, name: '', last_name: '', email: '' };
+  client: Client = { id: 0, name: '', last_name: '', email: '', ventaList: [] };
 
   constructor(
     private route: ActivatedRoute,

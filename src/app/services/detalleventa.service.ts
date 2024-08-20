@@ -1,33 +1,49 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { DetalleVenta } from '../detalleventa/detalleventa'; // Asegúrate de que la ruta sea correcta
+import { DetalleVenta } from '../detalleventa/detalleventa';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DetalleVentaService {
-  private apiUrl = 'http://localhost:8080/api/detalleventa'; // Ajusta la URL según tu configuración
+  private apiUrl = 'http://localhost:8080/api/detalle';
 
   constructor(private http: HttpClient) {}
 
   getAllDetalles(): Observable<DetalleVenta[]> {
-    return this.http.get<DetalleVenta[]>(this.apiUrl);
+    return this.http.get<DetalleVenta[]>(`${this.apiUrl}/findAll`);
   }
 
   getDetalleById(id: number): Observable<DetalleVenta> {
-    return this.http.get<DetalleVenta>(`${this.apiUrl}/${id}`);
+    return this.http.get<DetalleVenta>(`${this.apiUrl}/find/${id}`);
   }
 
-  addDetalle(detalle: DetalleVenta): Observable<DetalleVenta> {
-    return this.http.post<DetalleVenta>(this.apiUrl, detalle);
+  getDetalleByVentaId(ventaId: number): Observable<DetalleVenta[]> {
+    return this.http.get<DetalleVenta[]>(
+      `${this.apiUrl}/findByVenta/${ventaId}`
+    );
   }
 
-  updateDetalle(id: number, detalle: DetalleVenta): Observable<DetalleVenta> {
-    return this.http.put<DetalleVenta>(`${this.apiUrl}/${id}`, detalle);
+  addDetalle(detalle: DetalleVenta): Observable<string> {
+    return this.http.post<string>(`${this.apiUrl}/save`, detalle, {
+      responseType: 'text' as 'json',
+    });
+  }
+
+  addMultipleDetalles(detalles: DetalleVenta[]): Observable<string> {
+    return this.http.post<string>(`${this.apiUrl}/saveMultiple`, detalles, {
+      responseType: 'text' as 'json',
+    });
+  }
+
+  updateDetalle(id: number, detalle: DetalleVenta): Observable<string> {
+    return this.http.put<string>(`${this.apiUrl}/update/${id}`, detalle, {
+      responseType: 'text' as 'json',
+    });
   }
 
   deleteDetalle(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
   }
 }

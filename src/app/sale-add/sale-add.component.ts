@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ClientService } from '../services/client.service';
 import { ProductService } from '../services/product.service';
 import { VentaService } from '../services/venta.service';
+import { DetalleVentaService } from '../services/detalleventa.service';
 import { Client } from '../client/client';
 import { Product } from '../product/product';
 import { Venta } from '../venta/venta';
@@ -19,6 +20,15 @@ interface SelectedProduct {
   styleUrls: ['./sale-add.component.css'],
 })
 export class SaleAddComponent implements OnInit {
+  venta: Venta = {
+    id: 0,
+    total: 0,
+    estado: 1,
+    client: {} as Client,
+    detalleVentaList: [],
+  };
+
+  selectedProducts: SelectedProduct[] = [];
   clients: Client[] = [];
   filteredClients: Client[] = [];
   searchText: string = '';
@@ -28,12 +38,11 @@ export class SaleAddComponent implements OnInit {
   filteredProducts: Product[] = [];
   searchProductText: string = '';
 
-  selectedProducts: SelectedProduct[] = [];
-
   constructor(
+    private ventaService: VentaService,
+    private detalleVentaService: DetalleVentaService,
     private clientService: ClientService,
-    private productService: ProductService,
-    private ventaService: VentaService
+    private productService: ProductService
   ) {}
 
   ngOnInit(): void {
@@ -64,6 +73,7 @@ export class SaleAddComponent implements OnInit {
     this.selectedClient = client;
     this.searchText = `${client.name} ${client.last_name}`;
     this.filteredClients = [];
+    this.venta.client = client;
   }
 
   onSearchProduct(): void {
@@ -93,18 +103,25 @@ export class SaleAddComponent implements OnInit {
         subtotal: product.price,
       });
     }
+    this.updateTotal();
     this.searchProductText = '';
     this.filteredProducts = [];
   }
 
   updateSubtotal(item: SelectedProduct): void {
     item.subtotal = item.quantity * item.product.price;
+    this.updateTotal();
   }
 
   removeProduct(item: SelectedProduct): void {
     this.selectedProducts = this.selectedProducts.filter(
       (selected) => selected !== item
     );
+    this.updateTotal();
+  }
+
+  updateTotal(): void {
+    this.venta.total = this.getTotal();
   }
 
   getTotal(): number {
@@ -117,48 +134,82 @@ export class SaleAddComponent implements OnInit {
       return;
     }
 
-    const venta: Venta = {
-      idVenta: 0,
-      fecha: new Date().toISOString().split('T')[0],
+    const ventaToSave: Venta = {
+      id: 0,
       total: this.getTotal(),
-      mesa: 0,
-      idCliente: this.selectedClient.id,
       estado: 1,
+      client: this.selectedClient,
+      detalleVentaList: [],
     };
 
-    this.ventaService.addVenta(venta).subscribe(
-      (response: Venta) => {
-        const ventaId = response.idVenta;
-
-        if (ventaId) {
-          this.selectedProducts.forEach((item) => {
-            const detalle: DetalleVenta = {
-              id: 0,
-              idVenta: ventaId,
-              idProducto: item.product.id,
-              cantidad: item.quantity,
-              subtotal: item.subtotal,
-            };
-
-            this.ventaService.addDetalleVenta(detalle).subscribe(
-              () => {},
-              (error) => {
-                console.error('Error al agregar detalles de venta:', error);
-              }
-            );
-          });
-
-          this.selectedProducts = [];
-          this.selectedClient = null;
-          this.searchText = '';
-          this.searchProductText = '';
-        } else {
-          alert('Error al registrar la venta.');
-        }
+    this.ventaService.addVenta(ventaToSave).subscribe(
+      (response: string) => {
+        console.log('Respuesta del servidor:', response);
+        this.ventaService.getAllVentas().subscribe(
+          (ventas: Venta[]) => {
+            const lastVenta = ventas[ventas.length - 1];
+            this.saveDetallesVenta(lastVenta);
+          },
+          (error) => this.handleError(error)
+        );
       },
-      (error) => {
-        console.error('Error al agregar venta:', error);
-      }
+      (error) => this.handleError(error)
     );
+  }
+
+  saveDetallesVenta(venta: Venta): void {
+    const ventaId = venta.id;
+
+    const detalles: DetalleVenta[] = this.selectedProducts.map((item) => ({
+      id: 0,
+      subtotal: item.subtotal,
+      cantidad: item.quantity,
+      venta: { id: ventaId } as Venta,
+      product: item.product,
+    }));
+
+    if (detalles.length > 1) {
+      this.detalleVentaService.addMultipleDetalles(detalles).subscribe(
+        (response: string) => {
+          // alert('Detalles de venta registrados exitosamente.');
+          this.handleSuccess();
+        },
+        (error) => this.handleError(error)
+      );
+    } else if (detalles.length === 1) {
+      this.detalleVentaService.addDetalle(detalles[0]).subscribe(
+        (response: string) => {
+          // alert('Detalle de venta registrado exitosamente.');
+          this.handleSuccess();
+        },
+        (error) => this.handleError(error)
+      );
+    }
+  }
+
+  handleSuccess(): void {
+    alert('Venta registrada exitosamente.');
+    this.resetForm();
+  }
+
+  handleError(error: any): void {
+    alert('Error al registrar la venta.');
+    console.error('Error al registrar la venta', error);
+  }
+
+  resetForm(): void {
+    this.venta = {
+      id: 0,
+      total: 0,
+      estado: 1,
+      client: {} as Client,
+      detalleVentaList: [],
+    };
+    this.selectedProducts = [];
+    this.searchText = '';
+    this.searchProductText = '';
+    this.filteredClients = [];
+    this.filteredProducts = [];
+    this.selectedClient = null;
   }
 }

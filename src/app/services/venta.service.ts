@@ -9,31 +9,32 @@ import { DetalleVenta } from '../detalleventa/detalleventa';
 })
 export class VentaService {
   private apiUrl = 'http://localhost:8080/api/venta';
-  private detalleApiUrl = 'http://localhost:8080/api/detalleventa';
 
   constructor(private http: HttpClient) {}
 
   getAllVentas(): Observable<Venta[]> {
-    return this.http.get<Venta[]>(this.apiUrl);
+    return this.http.get<Venta[]>(`${this.apiUrl}/findAll`);
   }
 
   getVentaById(id: number): Observable<Venta> {
-    return this.http.get<Venta>(`${this.apiUrl}/${id}`);
+    return this.http.get<Venta>(`${this.apiUrl}/find/${id}`);
   }
 
-  addVenta(venta: Venta): Observable<Venta> {
-    return this.http.post<Venta>(this.apiUrl, venta);
+  addVenta(venta: Venta): Observable<string> {
+    return this.http.post<string>(`${this.apiUrl}/save`, venta, {
+      responseType: 'text' as 'json',
+    });
   }
 
-  updateVenta(id: number, venta: Venta): Observable<Venta> {
-    return this.http.put<Venta>(`${this.apiUrl}/${id}`, venta);
+  updateVenta(id: number, venta: Venta): Observable<string> {
+    return this.http.put<string>(`${this.apiUrl}/update/${id}`, venta, {
+      responseType: 'text' as 'json',
+    });
   }
 
-  deleteVenta(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
-  }
-
-  addDetalleVenta(detalle: DetalleVenta): Observable<DetalleVenta> {
-    return this.http.post<DetalleVenta>(this.detalleApiUrl, detalle);
+  deleteVenta(id: number): Observable<string> {
+    return this.http.delete<string>(`${this.apiUrl}/delete/${id}`, {
+      responseType: 'text' as 'json',
+    });
   }
 }

@@ -1,7 +1,10 @@
+import { Product } from '../product/product';
+import { Venta } from '../venta/venta';
+
 export interface DetalleVenta {
-  id: number;
-  idVenta: number;
-  idProducto: number;
-  cantidad: number;
+  id?: number;
   subtotal: number;
+  cantidad: number;
+  venta: { id: number };
+  product: Product;
 }

@@ -12,22 +12,28 @@ export class ClientService {
   constructor(private http: HttpClient) {}
 
   getAllClients(): Observable<Client[]> {
-    return this.http.get<Client[]>(this.apiUrl);
+    return this.http.get<Client[]>(`${this.apiUrl}/findAll`);
   }
 
   getClientById(clientId: number): Observable<Client> {
-    return this.http.get<Client>(`${this.apiUrl}/${clientId}`);
+    return this.http.get<Client>(`${this.apiUrl}/find/${clientId}`);
   }
 
-  addClient(client: Client): Observable<Client> {
-    return this.http.post<Client>(this.apiUrl, client);
+  addClient(client: Client): Observable<string> {
+    return this.http.post<string>(`${this.apiUrl}/save`, client, {
+      responseType: 'text' as 'json',
+    });
   }
 
-  updateClient(clientId: number, client: Client): Observable<Client> {
-    return this.http.put<Client>(`${this.apiUrl}/${clientId}`, client);
+  updateClient(clientId: number, client: Client): Observable<string> {
+    return this.http.put<string>(`${this.apiUrl}/update/${clientId}`, client, {
+      responseType: 'text' as 'json',
+    });
   }
 
-  deleteClient(clientId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${clientId}`);
+  deleteClient(id: number): Observable<string> {
+    return this.http.delete<string>(`${this.apiUrl}/delete/${id}`, {
+      responseType: 'text' as 'json',
+    });
   }
 }

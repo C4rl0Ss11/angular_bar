@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { DetalleVentaService } from '../services/detalleventa.service';
-import { DetalleVenta } from './detalleventa'; // Asegúrate de que la ruta sea correcta
+import { DetalleVenta } from '../detalleventa/detalleventa';
 
 @Component({
   selector: 'app-detalleventa',
@@ -9,41 +9,27 @@ import { DetalleVenta } from './detalleventa'; // Asegúrate de que la ruta sea 
   styleUrls: ['./detalleventa.component.css'],
 })
 export class DetalleVentaComponent implements OnInit {
-  detallesVenta: DetalleVenta[] = [];
-  displayedColumns: string[] = [
-    'id',
-    'idVenta',
-    'idProducto',
-    'cantidad',
-    'subtotal',
-    'acciones',
-  ];
+  detalles: DetalleVenta[] = [];
 
   constructor(
-    private detalleVentaService: DetalleVentaService,
-    private router: Router
+    private route: ActivatedRoute,
+    private detalleVentaService: DetalleVentaService
   ) {}
 
   ngOnInit(): void {
-    this.detalleVentaService.getAllDetalles().subscribe((data) => {
-      this.detallesVenta = data;
-    });
+    const ventaId = this.route.snapshot.paramMap.get('id');
+    if (ventaId) {
+      this.getDetallesByVentaId(+ventaId);
+    }
   }
 
-  editDetalle(detalle: DetalleVenta): void {
-    this.router.navigate(['/detalleventa/edit', detalle.id]);
-  }
-
-  deleteDetalle(detalleId: number): void {
-    this.detalleVentaService.deleteDetalle(detalleId).subscribe(
-      () => {
-        this.detallesVenta = this.detallesVenta.filter(
-          (detalle) => detalle.id !== detalleId
-        );
-        this.router.navigate(['/detalleventa']);
+  getDetallesByVentaId(ventaId: number): void {
+    this.detalleVentaService.getAllDetalles().subscribe(
+      (data) => {
+        this.detalles = data.filter((detalle) => detalle.venta.id === ventaId);
       },
       (error) => {
-        console.error('Error', error);
+        console.error('Error al obtener los detalles de la venta', error);
       }
     );
   }

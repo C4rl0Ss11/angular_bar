@@ -1,8 +1,11 @@
+import { Client } from '../client/client';
+import { DetalleVenta } from '../detalleventa/detalleventa';
+
 export interface Venta {
-  idVenta: number;
-  fecha: string;
+  id: number;
+  fecha?: string;
   total: number;
-  mesa: number;
-  idCliente: number;
   estado: number;
+  client: Client;
+  detalleVentaList: DetalleVenta[];
 }

@@ -6,42 +6,38 @@
         <table class="table table-hover">
           <thead class="thead-light">
             <tr>
-              <th>ID</th>
-              <th>ID Cliente</th>
+              <th>#</th>
+              <th>Cliente</th>
               <th>Fecha</th>
               <th>Total</th>
-              <th>Mesa</th>
-              >
               <th>Estado</th>
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let venta of ventas" class="text-center">
-              <td>{{ venta.idVenta }}</td>
-              <td>{{ venta.idCliente }}</td>
+              <td>{{ venta.id }}</td>
+              <td>{{ venta.client.name }} {{ venta.client.last_name }}</td>
               <td>{{ venta.fecha | date : "short" }}</td>
-              <td>{{ venta.total | currency }}</td>
-              <td>{{ venta.mesa }}</td>
+              <td>S/ {{ venta.total | number : "1.2-2" }}</td>
               <td>{{ venta.estado }}</td>
               <td>
-                <button>
-                  <a [routerLink]="['/detalle-venta', venta.idVenta]"
+                <button class="btn btn-info">
+                  <a
+                    [routerLink]="['/detalleventa', venta.id]"
+                    class="text-white"
                     >Ver Detalle</a
                   >
                 </button>
               </td>
-              <td>
+              <!-- <td>
                 <button class="btn btn-warning me-2" (click)="editVenta(venta)">
                   Editar
                 </button>
-                <button
-                  class="btn btn-danger"
-                  (click)="deleteVenta(venta.idVenta)"
-                >
+                <button class="btn btn-danger" (click)="deleteVenta(venta.id)">
                   Eliminar
                 </button>
-              </td>
+              </td> -->
             </tr>
           </tbody>
         </table>

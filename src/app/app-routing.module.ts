@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'categorias/edit/:id', component: CategoryEditComponent },
   { path: 'ventas', component: VentaComponent },
   { path: 'ventas/add', component: SaleAddComponent },
-  { path: 'detalleventas', component: DetalleVentaComponent },
+  { path: 'detalleventa/:id', component: DetalleVentaComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/home' },
 ];
