@@ -11,7 +11,7 @@
               <th>Fecha</th>
               <th>Total</th>
               <th>Mesa</th>
-              >
+              
               <th>Estado</th>
               <th>Acciones</th>
             </tr>
@@ -25,7 +25,7 @@
               <td>{{ venta.mesa }}</td>
               <td>{{ venta.estado }}</td>
               <td>
-                <button>
+                <button  class="btn btn-dark me-2">
                   <a [routerLink]="['/detalle-venta', venta.idVenta]"
                     >Ver Detalle</a
                   >
@@ -36,7 +36,7 @@
                   Editar
                 </button>
                 <button
-                  class="btn btn-danger"
+                  class="btn btn-dark"
                   (click)="deleteVenta(venta.idVenta)"
                 >
                   Eliminar

@@ -1,3 +1,71 @@
 .btn-primary {
   margin-bottom: 30px;
 }
+
+
+.btn-danger {
+  background-color: #0f0f11;
+  border: none;
+}
+.container {
+  margin-top: 20px;
+  padding: 15px;
+}
+
+.card {
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+  margin-bottom: 0;
+  background-color: #fff;
+}
+
+.table th, .table td {
+  vertical-align: middle;
+  text-align: center;
+  padding: 12px;
+}
+
+
+
+
+.btn {
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.btn a {
+  color: white;
+  text-decoration: none;
+}
+
+.btn-danger, .btn-warning {
+  color: white;
+  border: none;
+}
+
+.btn-warning {
+  background-color: #ff9800;
+}
+
+.btn-warning:hover {
+  background-color: #e68900;
+}
+
+
+
+.btn-danger:hover {
+  background-color: #d32f2f;
+}
+
+.btn a {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+

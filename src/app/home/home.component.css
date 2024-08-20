@@ -1,0 +1,14 @@
+.home-container {
+    background-image: url('https://static.vecteezy.com/system/resources/thumbnails/000/615/015/small_2x/1304-53.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    padding: 20px;
+    position: relative;
+    background-color: rgb(4, 1, 15);
+    
+    z-index: -1; /* Envía la imagen de fondo al fondo */
+}
+
+
+
