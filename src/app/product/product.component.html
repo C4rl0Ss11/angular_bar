@@ -10,14 +10,14 @@
     </div>
   </div>
   <div>
-  <input
-        type="text"
-        class="form-control"
-        placeholder="Buscar Productos"
-        [(ngModel)]="searchText"
-        (input)="applyFilter()"
-      />
-    </div>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Buscar Productos"
+      [(ngModel)]="searchText"
+      (input)="applyFilter()"
+    />
+  </div>
   <div class="row">
     <div class="col-md-12">
       <table class="table table-bordered table-hover">
@@ -34,20 +34,23 @@
         </thead>
         <tbody>
           <tr *ngFor="let product of filteredProducts">
-            <td> {{product.id}}</td>
+            <td>{{ product.id }}</td>
             <td>
               <img
                 [src]="getProductImage(product.id)"
                 class="img-fluid"
                 alt="{{ product.name }}"
-                style="width: 50px; 
-                      height: 50px; 
-                      object-fit: cover;"
+                style="width: 50px; height: 50px; object-fit: cover"
               />
             </td>
             <td>{{ product.name }}</td>
             <td>{{ product.price | currency }}</td>
-            <td>{{ product.stock }}</td>
+            <td>
+              <span *ngIf="product.stock > 0">{{ product.stock }}</span>
+              <span *ngIf="product.stock === 0" style="color: red"
+                >Sin stock</span
+              >
+            </td>
             <td>{{ product.maker.name }}</td>
             <td>
               <button

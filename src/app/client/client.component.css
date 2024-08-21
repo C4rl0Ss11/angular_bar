@@ -2,7 +2,7 @@
   width: 100%;
   background-color: white;
   max-width: 80%;
-  margin: 16px auto; /* Combina márgenes */
+  margin: 16px auto;
 }
 
 .card-header {
@@ -32,10 +32,10 @@
 
 .table td {
   vertical-align: middle;
-  text-align: center; /* Centralizar texto en td */
+  text-align: center;
 }
 
-.btn-outline-primary {
+.btn-outline-dark {
   margin-right: 4px;
 }
 
@@ -51,15 +51,15 @@ i {
   margin-bottom: 20px;
 }
 
-.btn-primary,
-.btn-primary.btn-sm,
+.btn-dark,
+.btn-dark.btn-sm,
 .btn-danger.btn-sm {
   padding: 10px 20px;
   font-size: 16px;
   font-weight: bold;
 }
 
-.btn-primary.btn-sm,
+.btn-dark.btn-sm,
 .btn-danger.btn-sm {
   padding: 5px 10px;
   font-size: 14px;

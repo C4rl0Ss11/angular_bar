@@ -1,29 +1,98 @@
-.autocomplete-suggestions {
-  border: 1px solid #ccc;
+.container {
+  max-width: 900px;
+  margin-top: 20px;
+  margin-right: auto;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.form-control {
   border-radius: 4px;
-  max-height: 200px;
+  border: 1px solid #ccc;
+  padding: 8px;
+  font-size: 0.9rem;
+}
+
+.autocomplete-suggestions {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  max-height: 120px;
   overflow-y: auto;
-  position: absolute;
-  background: white;
-  z-index: 1000;
+  margin-top: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-size: 0.9rem;
 }
 
 .autocomplete-suggestions ul {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
   margin: 0;
 }
 
 .autocomplete-suggestions li {
-  padding: 10px;
+  padding: 6px;
   cursor: pointer;
 }
 
 .autocomplete-suggestions li:hover {
-  background-color: #f1f1f1;
+  background-color: #f0f0f0;
 }
 
-.table th,
-.table td {
+.table {
+  margin-top: 15px;
+  background-color: #fff;
+  font-size: 0.9rem;
+}
+
+.table-bordered {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.table thead {
+  background-color: #f8f9fa;
+}
+
+.table thead th {
   text-align: center;
+  padding: 8px;
+}
+
+.table tbody td {
+  vertical-align: middle;
+  text-align: center;
+  padding: 6px;
+}
+
+.table tbody input.form-control {
+  width: 50px;
+  margin: auto;
+}
+
+.btn {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+h4,
+h5 {
+  margin-top: 15px;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+h5 {
+  text-align: right;
 }

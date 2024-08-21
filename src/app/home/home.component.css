@@ -1,0 +1,9 @@
+.home-container {
+  background-image: url("https://cdn.pixabay.com/photo/2016/11/19/13/53/margarita-1839361_1280.jpg");
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  padding: 20px;
+  position: relative;
+  background-color: rgb(4, 1, 15);
+}

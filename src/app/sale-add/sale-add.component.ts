@@ -89,13 +89,25 @@ export class SaleAddComponent implements OnInit {
   }
 
   selectProduct(product: Product): void {
+    if (product.stock <= 0) {
+      alert(`Este producto se encuentra sin stock.`);
+      return;
+    }
+
     const existingProduct = this.selectedProducts.find(
       (item) => item.product.id === product.id
     );
+
     if (existingProduct) {
-      existingProduct.quantity += 1;
-      existingProduct.subtotal =
-        existingProduct.quantity * existingProduct.product.price;
+      if (existingProduct.quantity < product.stock) {
+        existingProduct.quantity += 1;
+        existingProduct.subtotal =
+          existingProduct.quantity * existingProduct.product.price;
+      } else {
+        alert(
+          `Solo hay disponible ${product.stock} unidades de este producto.`
+        );
+      }
     } else {
       this.selectedProducts.push({
         product: product,
@@ -109,8 +121,17 @@ export class SaleAddComponent implements OnInit {
   }
 
   updateSubtotal(item: SelectedProduct): void {
-    item.subtotal = item.quantity * item.product.price;
-    this.updateTotal();
+    if (item.quantity <= item.product.stock) {
+      item.subtotal = item.quantity * item.product.price;
+      this.updateTotal();
+    } else {
+      alert(
+        `Solo hay disponible ${item.product.stock} unidades de este producto.`
+      );
+      item.quantity = item.product.stock;
+      item.subtotal = item.quantity * item.product.price;
+      this.updateTotal();
+    }
   }
 
   removeProduct(item: SelectedProduct): void {
@@ -171,7 +192,7 @@ export class SaleAddComponent implements OnInit {
     if (detalles.length > 1) {
       this.detalleVentaService.addMultipleDetalles(detalles).subscribe(
         (response: string) => {
-          // alert('Detalles de venta registrados exitosamente.');
+          this.reduceStock(detalles);
           this.handleSuccess();
         },
         (error) => this.handleError(error)
@@ -179,12 +200,22 @@ export class SaleAddComponent implements OnInit {
     } else if (detalles.length === 1) {
       this.detalleVentaService.addDetalle(detalles[0]).subscribe(
         (response: string) => {
-          // alert('Detalle de venta registrado exitosamente.');
+          this.reduceStock(detalles);
           this.handleSuccess();
         },
         (error) => this.handleError(error)
       );
     }
+  }
+
+  reduceStock(detalles: DetalleVenta[]): void {
+    detalles.forEach((detalle) => {
+      const product = this.products.find((p) => p.id === detalle.product.id);
+      if (product) {
+        product.stock -= detalle.cantidad;
+        this.productService.updateProduct(product.id, product).subscribe();
+      }
+    });
   }
 
   handleSuccess(): void {
@@ -211,5 +242,10 @@ export class SaleAddComponent implements OnInit {
     this.filteredClients = [];
     this.filteredProducts = [];
     this.selectedClient = null;
+  }
+  //exeptions
+  filterNegativeSign(event: any): void {
+    const inputValue = event.target.value;
+    event.target.value = inputValue.replace(/-/g, '');
   }
 }

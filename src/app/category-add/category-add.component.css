@@ -3,27 +3,51 @@
   background-color: white;
   margin: 16px auto;
   max-width: 80%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 
 .card-header {
-  background-color: #007bff;
+  background-color: #0f2e50;
   color: white;
+  padding: 16px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 
 .card-header h5 {
   font-size: 24px;
   font-weight: bold;
+  margin: 0;
 }
 
-.form-label,
-.form-control {
+.card-body {
+  padding: 16px;
+}
+
+.form-label {
   font-weight: bold;
 }
 
 .form-control {
   margin-bottom: 16px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
 }
 
 .btn-primary {
   margin-top: 16px;
+  background-color: #007bff;
+  border-color: #007bff;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 4px;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004085;
 }

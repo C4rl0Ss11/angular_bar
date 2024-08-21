@@ -1,43 +1,66 @@
+.btn-primary {
+  margin-bottom: 30px;
+}
+
+.btn-danger {
+  background-color: #0f0f11;
+  border: none;
+}
 .container {
   margin-top: 20px;
+  padding: 15px;
 }
 
 .card {
-  margin: 20px;
-}
-
-.card-header h3 {
-  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .table {
-  width: 100%;
-  margin-bottom: 1rem;
-  color: #212529;
-  border-collapse: collapse;
+  margin-bottom: 0;
+  background-color: #fff;
 }
 
 .table th,
 .table td {
   vertical-align: middle;
-  padding: 8px;
-}
-
-.table thead th {
-  background-color: #f8f9fa;
-  font-weight: bold;
   text-align: center;
+  padding: 12px;
 }
 
-.table tbody td {
-  text-align: center;
+.btn {
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  text-transform: uppercase;
 }
 
-.table .btn {
-  margin: 0;
-}
-
-.table .btn a {
+.btn a {
+  color: white;
   text-decoration: none;
+}
+
+.btn-danger,
+.btn-warning {
+  color: white;
+  border: none;
+}
+
+.btn-warning {
+  background-color: #ff9800;
+}
+
+.btn-warning:hover {
+  background-color: #e68900;
+}
+
+.btn-danger:hover {
+  background-color: #d32f2f;
+}
+
+.btn a {
+  display: block;
   color: inherit;
+  text-decoration: none;
 }

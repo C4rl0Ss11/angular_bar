@@ -41,7 +41,10 @@
               *ngFor="let product of filteredProducts"
               (click)="selectProduct(product)"
             >
-              {{ product.name }} - ${{ product.price }}
+              {{ product.name }}
+              <span *ngIf="product.stock === 0" style="color: red">
+                Sin stock
+              </span>
             </li>
           </ul>
         </div>
@@ -54,6 +57,7 @@
               <th>Nombre</th>
               <th>Precio</th>
               <th>Cantidad</th>
+              <th>Stock Disponible</th>
               <th>Subtotal</th>
               <th>Acciones</th>
             </tr>
@@ -61,17 +65,27 @@
           <tbody>
             <tr *ngFor="let item of selectedProducts">
               <td>{{ item.product.name }}</td>
-              <td>{{ item.product.price }}</td>
+              <td>S/. {{ item.product.price }}</td>
               <td>
                 <input
                   type="number"
                   class="form-control"
                   [(ngModel)]="item.quantity"
-                  (change)="updateSubtotal(item)"
-                  min="1"
+                  (input)="filterNegativeSign($event); updateSubtotal(item)"
+                  [min]="1"
+                  [max]="item.product.stock"
+                  [disabled]="item.product.stock === 0"
                 />
               </td>
-              <td>{{ item.subtotal | currency }}</td>
+              <td>
+                <span *ngIf="item.product.stock > 0">
+                  {{ item.product.stock }}
+                </span>
+                <span *ngIf="item.product.stock === 0" style="color: red">
+                  Sin stock
+                </span>
+              </td>
+              <td>S/. {{ item.subtotal }}</td>
               <td>
                 <button
                   class="btn btn-danger btn-sm"
@@ -86,7 +100,7 @@
         <h5>Total: S/ {{ venta.total | number : "1.2-2" }}</h5>
       </div>
       <div class="mt-3">
-        <button class="btn btn-primary" (click)="addVenta()">
+        <button class="btn btn-dark" (click)="addVenta()">
           Registrar Venta
         </button>
       </div>

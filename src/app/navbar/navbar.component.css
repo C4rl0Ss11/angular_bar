@@ -1,10 +1,7 @@
-.navbar {
-  margin-bottom: 20px;
-}
-.nav-active { /* Color de fondo para el enlace activo */
-  color: #ffffff; /* Color del texto para el enlace activo */
-  font-size: 1.1rem; /* Tamaño de fuente más grande */
-  font-weight: bold; /* Texto en negrita */
-  border-radius: 0.55rem; /* Bordes redondeados opcionales */
-  padding: 0.5rem 1rem; /* Ajusta el espaciado interno para mayor área clickeable */
+.nav-active {
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 0.55rem;
+  padding: 0.5rem 1rem;
 }

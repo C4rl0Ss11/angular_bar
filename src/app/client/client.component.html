@@ -29,6 +29,7 @@
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Correo</th>
+            <th>Ventas Realizadas</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -38,19 +39,17 @@
             <td>{{ client.name }}</td>
             <td>{{ client.last_name }}</td>
             <td>{{ client.email }}</td>
+            <td>{{ client.ventaList.length }}</td>
             <td>
-              <button
-                class="btn btn-primary btn-sm"
-                (click)="editClient(client)"
-              >
+              <button class="btn btn-dark btn-sm" (click)="editClient(client)">
                 Editar
               </button>
-              <button
+              <!-- <button
                 class="btn btn-danger btn-sm"
                 (click)="deleteClient(client.id)"
               >
                 Eliminar
-              </button>
+              </button> -->
             </td>
           </tr>
         </tbody>
