@@ -4,24 +4,34 @@
       <h3>Detalles de la Venta</h3>
     </div>
     <div class="card-body">
-      <table class="table table-hover">
-        <thead class="thead-light">
-          <tr>
-            <th>ID</th>
-            <th>Productos</th>
-            <th>Cantidad</th>
-            <th>Subtotal</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let detalle of detalles" class="text-center">
-            <td>{{ detalle.id }}</td>
-            <td>{{ detalle.product.name }}</td>
-            <td>{{ detalle.cantidad }}</td>
-            <td>S/ {{ detalle.subtotal | number : "1.2-2" }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="card-body">
+        <div *ngIf="venta" class="sale-info">
+          <p>
+            <strong>Cliente:</strong> {{ venta.client.name }}
+            {{ venta.client.last_name }}
+          </p>
+          <p><strong>Fecha:</strong> {{ venta.fecha | date : "dd/MM/yyyy" }}</p>
+          <p><strong>Total:</strong> S/ {{ venta.total | number : "1.2-2" }}</p>
+        </div>
+        <table class="table table-hover">
+          <thead class="thead-light">
+            <tr>
+              <th>ID</th>
+              <th>Productos</th>
+              <th>Cantidad</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let detalle of detalles" class="text-center">
+              <td>{{ detalle.id }}</td>
+              <td>{{ detalle.product.name }}</td>
+              <td>{{ detalle.cantidad }}</td>
+              <td>S/ {{ detalle.subtotal | number : "1.2-2" }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

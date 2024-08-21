@@ -20,7 +20,7 @@
               <td>{{ venta.client.name }} {{ venta.client.last_name }}</td>
               <td>{{ venta.fecha | date : "short" }}</td>
               <td>S/ {{ venta.total | number : "1.2-2" }}</td>
-              <td>{{ venta.estado === 1 ? 'Completado' : 'Incompleto' }}</td>
+              <td>{{ venta.estado === 1 ? "Completado" : "Pendiente" }}</td>
 
               <td>
                 <button class="btn btn-info">
