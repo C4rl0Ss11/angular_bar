@@ -20,6 +20,9 @@
         id="price"
         [(ngModel)]="product.price"
         name="price"
+        min="0"
+        step="0.01"
+        (input)="filterNegativeSign($event)"
         required
       />
     </div>

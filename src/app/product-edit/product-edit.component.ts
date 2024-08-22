@@ -72,4 +72,10 @@ export class ProductEditComponent implements OnInit {
   cancel(): void {
     this.router.navigate(['/productos']);
   }
+
+  //exeptions
+  filterNegativeSign(event: any): void {
+    const inputValue = event.target.value;
+    event.target.value = inputValue.replace(/-/g, '');
+  }
 }
