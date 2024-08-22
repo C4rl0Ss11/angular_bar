@@ -44,7 +44,7 @@
               />
             </td>
             <td>{{ product.name }}</td>
-            <td>{{ product.price | currency }}</td>
+            <td>S/. {{ product.price }}</td>
             <td>
               <span *ngIf="product.stock > 0">{{ product.stock }}</span>
               <span *ngIf="product.stock === 0" style="color: red"
