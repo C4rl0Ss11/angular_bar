@@ -10,6 +10,8 @@ import { Venta } from '../venta/venta';
 })
 export class VentaComponent implements OnInit {
   ventas: Venta[] = [];
+  filteredVentas: Venta[] = [];
+  searchText: string = '';
   displayedColumns: string[] = [
     'id',
     'fecha',
@@ -24,9 +26,19 @@ export class VentaComponent implements OnInit {
   ngOnInit(): void {
     this.ventaService.getAllVentas().subscribe((data) => {
       this.ventas = data;
+      this.filteredVentas = data;
     });
   }
-
+  onSearch(): void {
+    if (this.searchText.trim() === '') {
+      this.filteredVentas = this.ventas; 
+    } else {
+      const searchTextLower = this.searchText.toLowerCase();
+      this.filteredVentas = this.ventas.filter((venta) =>
+        venta.client.name.toLowerCase().includes(searchTextLower)
+      );
+    }
+  }
   editVenta(venta: Venta): void {
     this.router.navigate(['/ventas/edit', venta.id]);
   }
